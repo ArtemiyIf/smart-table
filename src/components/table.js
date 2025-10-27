@@ -14,7 +14,7 @@ export function initTable(settings, onAction) {
     // @todo: #1.2 —  вывести дополнительные шаблоны до и после таблицы
     before.reverse().forEach(subName => {
         root[subName] = cloneTemplate(subName);
-        root.container.append(root[subName].container);
+        root.container.prepend(root[subName].container);
     });
     after.forEach(subName => {                            // перебираем нужный массив идентификаторов
     root[subName] = cloneTemplate(subName);            // клонируем и получаем объект, сохраняем в таблице
@@ -28,7 +28,7 @@ export function initTable(settings, onAction) {
     root.container.addEventListener('reset', () => {
         setTimeout(onAction);
     });
-    root.container.addEventListener('submit', () => {
+    root.container.addEventListener('submit', (e) => {
         e.preventDefault();
         onAction(e.submitter);
     });
